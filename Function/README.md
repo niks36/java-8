@@ -5,15 +5,13 @@ Function<T, R> is an in-built functional interface introduced in Java 8 in the j
 There are basically 3 methods
 ```java
 
-@FunctionalInterface
-public interface Function<T, R> {
-    R apply(T t);
+R apply(T t);
 
-    Function<V, R> compose(Function<? super V, ? extends T> before);
+Function<V, R> compose(Function<? super V, ? extends T> before);
 
-    Function<T, V> andThen(Function<? super R, ? extends V> after) ;
+Function<T, V> andThen(Function<? super R, ? extends V> after) ;
 
-}
+
 ```
 
 Function Descriptor is T -> R. This means an object of type T is input to the lambda and an object of type R is obtained as return value
