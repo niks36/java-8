@@ -21,6 +21,26 @@ public class StreamTest {
         System.out.println("Using skip function");
         employees = employeeList.stream().skip(2).collect(Collectors.toList());
         employees.forEach(System.out::println);
+
+        System.out.println("Using map function");
+        List<String> nameList = employeeList.stream()
+                .map(Employee::getName)
+                .collect(Collectors.toList());
+        nameList.forEach(System.out::println);
+
+        System.out.println("allMatch method");
+        boolean result = employeeList.stream().allMatch(employee -> employee.getId() < 6);
+        System.out.println("result: " + result);
+
+        System.out.println("anyMatch method");
+        result = employeeList.stream().anyMatch(employee -> employee.getId() < 4);
+        System.out.println("result: " + result);
+
+        System.out.println("noneMatch method");
+        result = employeeList.stream().noneMatch(employee -> employee.getId() < 4);
+        System.out.println("result: " + result);
+
+
     }
 
 
