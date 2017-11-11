@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamTest {
 
@@ -39,6 +40,14 @@ public class StreamTest {
         System.out.println("noneMatch method");
         result = employeeList.stream().noneMatch(employee -> employee.getId() < 4);
         System.out.println("result: " + result);
+
+        System.out.println("infinite method");
+        List<Integer> integers = Stream.iterate(1, n -> 2 * n + 1).limit(10).collect(Collectors.toList());
+        integers.forEach(System.out::println);
+
+        System.out.println("generate method");
+        List<Double> collect = Stream.generate(Math::random).limit(10).collect(Collectors.toList());
+        collect.forEach(System.out::println);
 
 
     }
