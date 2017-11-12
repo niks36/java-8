@@ -1,16 +1,17 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamTest {
 
     public static void main(String[] args) {
-        List<Employee> employeeList = Arrays.asList(new Employee("Employee1", 1),
-                new Employee("Employee2", 2),
-                new Employee("Employee3", 3),
-                new Employee("Employee4", 4),
-                new Employee("Employee5", 5));
+        List<Employee> employeeList = Arrays.asList(new Employee("Employee1", 1, 10000.0),
+                new Employee("Employee2", 2, 20000.0),
+                new Employee("Employee3", 3, 30000.0),
+                new Employee("Employee4", 4, 12000.0),
+                new Employee("Employee5", 5, 50000.0));
 
         List<Employee> employees = employeeList.stream().filter(employee -> employee.getId() > 3).collect(Collectors.toList());
         employees.forEach(System.out::println);
@@ -49,6 +50,14 @@ public class StreamTest {
         List<Double> collect = Stream.generate(Math::random).limit(10).collect(Collectors.toList());
         collect.forEach(System.out::println);
 
+        System.out.println("reduce method using first varient");
+        Double totalSalary = employeeList.stream().map(Employee::getSalary).reduce(0.00, (a, b) -> a + b);
+        System.out.println("Total Salary:" + totalSalary);
+
+        System.out.println("reduce method using second varient");
+        Optional<Employee> reduce = employeeList.stream().reduce((a, b) -> a.getSalary() > b.getSalary()
+                ? a : b);
+        reduce.ifPresent(employee -> System.out.println("Maximum salary:" + employee));
 
     }
 
@@ -58,10 +67,13 @@ public class StreamTest {
 class Employee {
     private String name;
     private Integer id;
+    private Double salary;
 
-    public Employee(String name, Integer id) {
+
+    public Employee(String name, Integer id, Double salary) {
         this.name = name;
         this.id = id;
+        this.salary = salary;
     }
 
     public String getName() {
@@ -80,11 +92,20 @@ class Employee {
         this.id = id;
     }
 
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", id=" + id +
+                ", salary=" + salary +
                 '}';
     }
 }
