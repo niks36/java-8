@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CollectorTest {
@@ -19,6 +17,15 @@ public class CollectorTest {
 
         collect.forEach((aBoolean, employees) -> System.out.println(aBoolean + "- " + employees));
 
+        Long aLong = employeeList.stream().collect(Collectors.counting());
+        System.out.println("Size of collection :" + aLong);
 
+        System.out.println("\nMin example");
+        Optional<Employee> employee = employeeList.stream().min(Comparator.comparing(Employee::getAge));
+        employee.ifPresent(System.out::println);
+
+        System.out.println("\nMax example");
+        employee = employeeList.stream().max(Comparator.comparing(Employee::getAge));
+        employee.ifPresent(System.out::println);
     }
 }
