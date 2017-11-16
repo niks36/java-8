@@ -17,6 +17,9 @@ public class CollectorTest {
 
         collect.forEach((aBoolean, employees) -> System.out.println(aBoolean + "- " + employees));
 
+        Map<Boolean, Long> booleanLongMap = employeeList.stream().collect(Collectors.partitioningBy((Employee e) -> e.getDepartment().equals("HR"), Collectors.counting()));
+        booleanLongMap.forEach((aBoolean, employees) -> System.out.println(aBoolean + "- " + employees));
+
         Long aLong = employeeList.stream().collect(Collectors.counting());
         System.out.println("Size of collection :" + aLong);
 
