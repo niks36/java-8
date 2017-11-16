@@ -27,5 +27,18 @@ public class CollectorTest {
         System.out.println("\nMax example");
         employee = employeeList.stream().max(Comparator.comparing(Employee::getAge));
         employee.ifPresent(System.out::println);
+
+
+        System.out.println("\nJoining using first variant");
+        String joining1 = employeeList.stream().map(Employee::getName).collect(Collectors.joining());
+        System.out.println(joining1);
+
+        System.out.println("\nJoining using second variant");
+        joining1 = employeeList.stream().map(Employee::getName).collect(Collectors.joining(",\n"));
+        System.out.println(joining1);
+
+        System.out.println("\nJoining using second variant");
+        joining1 = employeeList.stream().map(Employee::getName).collect(Collectors.joining(",\n", "Start\n", "\nEnd"));
+        System.out.println(joining1);
     }
 }
