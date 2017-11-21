@@ -26,3 +26,8 @@ hs_err_pid*
 .gitignore
 .idea/
 production/
+/Collector/Collector.iml
+/Supplier/Supplier.iml
+/Consumer/Consumer.iml
+/Predicate/Predicate.iml
+/Function/Function.iml
