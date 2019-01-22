@@ -1,4 +1,9 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.LongSummaryStatistics;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -39,6 +44,11 @@ public class GroupByTest {
                 .collect(Collectors.groupingBy(Employee::getDepartment,
                         Collectors.summarizingLong(Employee::getAge)));
         statisticsMap.forEach((s, longSummaryStatistics) -> System.out.println(s + " - " + longSummaryStatistics));
+
+        System.out.println("\nUsing reduce");
+        Integer reduce = employeeList.stream().
+                reduce(0, (output, ob) -> output + ob.getAge(), (a, b) -> a + b);
+        System.out.println(reduce);
 
         System.out.println("\nUsing groupBy & mapping");
         Map<String, List<String>> listMap = employeeList.stream()
